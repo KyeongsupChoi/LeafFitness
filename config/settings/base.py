@@ -6,8 +6,8 @@ from pathlib import Path
 import environ
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# leaffitnesss/
-APPS_DIR = BASE_DIR / "leaffitnesss"
+# leaffitness/
+APPS_DIR = BASE_DIR / "leaffitness"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -49,7 +49,7 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres:///leaffitnesss",
+        default="postgres:///leaffitness",
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -86,7 +86,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "leaffitnesss.users",
+    "leaffitness.users",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -95,7 +95,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "leaffitnesss.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "leaffitness.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "leaffitnesss.users.context_processors.allauth_settings",
+                "leaffitness.users.context_processors.allauth_settings",
             ],
         },
     },
@@ -272,13 +272,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_ADAPTER = "leaffitnesss.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "leaffitness.users.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
-ACCOUNT_FORMS = {"signup": "leaffitnesss.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "leaffitness.users.forms.UserSignupForm"}
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_ADAPTER = "leaffitnesss.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "leaffitness.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_FORMS = {"signup": "leaffitnesss.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "leaffitness.users.forms.UserSocialSignupForm"}
 
 
 # Your stuff...
