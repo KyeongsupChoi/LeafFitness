@@ -1,6 +1,6 @@
 # ruff: noqa: ERA001, E501
 """Base settings to build other settings files upon."""
-
+import os
 from pathlib import Path
 
 import environ
@@ -8,7 +8,12 @@ import environ
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # leaffitness/
 APPS_DIR = BASE_DIR / "leaffitness"
-env = environ.Env()
+
+env = environ.Env(
+    #Set casting, default value
+    DEBUG=(bool, False) )
+
+env.read_env(str(BASE_DIR / ".env"))
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
@@ -47,10 +52,14 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-        default="postgres:///leaffitness",
-    ),
+    "default": {
+        "ENGINE": env('DB_ENGINE'),
+        "NAME": env('DB_NAME'),
+        "USER": env('DB_USER'),
+        "PASSWORD": env('DB_PASSWORD'),
+        "HOST": env('DB_HOST'),
+        "PORT": env('DB_PORT'),
+    }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD

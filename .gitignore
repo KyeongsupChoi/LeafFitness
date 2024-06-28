@@ -328,3 +328,4 @@ dump.rdb
 ../leaffitnesss/media/
 
 .pytest_cache/
+/.env
